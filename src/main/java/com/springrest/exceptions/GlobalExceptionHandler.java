@@ -17,15 +17,15 @@ public class GlobalExceptionHandler {
 //    }
 
     //@ResponseStatus(value = HttpStatus.CONFLICT, reason = "Data integrity violation")
-    @ResponseBody
-    @ExceptionHandler(ForecastNotFoundException.class)
-    public RestExceptionResponse forecastNotFound (){
-
-        RestExceptionResponse restExceptionResponse = new RestExceptionResponse();
-        restExceptionResponse.setError("error");
-
-        return restExceptionResponse;
-
-    }
+//    @ResponseBody
+//    @ExceptionHandler(.class)
+//    public RestExceptionResponse forecastNotFound (){
+//
+//        RestExceptionResponse restExceptionResponse = new RestExceptionResponse();
+//        restExceptionResponse.setError("error");
+//
+//        return restExceptionResponse;
+//
+//    }
 
 }
