@@ -13,6 +13,7 @@ import org.springframework.data.gemfire.CacheFactoryBean;
 import org.springframework.data.gemfire.LocalRegionFactoryBean;
 import org.springframework.data.gemfire.support.GemfireCacheManager;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Properties;
@@ -66,7 +67,7 @@ public class Application {
         LocalRegionFactoryBean<Integer, Integer> forecastRegion = new LocalRegionFactoryBean<>();
         forecastRegion.setCache(cache);
         forecastRegion.setClose(false);
-        forecastRegion.setName("weather");
+        forecastRegion.setName("beer");
         forecastRegion.setPersistent(false);
         return forecastRegion;
     }
@@ -76,6 +77,11 @@ public class Application {
         GemfireCacheManager cacheManager = new GemfireCacheManager();
         cacheManager.setCache(gemfireCache);
         return cacheManager;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }

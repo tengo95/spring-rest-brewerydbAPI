@@ -1,5 +1,6 @@
 package com.springrest.rest_controllers;
 
+import com.springrest.exceptions.APICallException;
 import com.springrest.model.Beer;
 import com.springrest.model.HomeworkBeer2;
 import com.springrest.model.HomeworkBeerDB.HomeworkBeer;
@@ -23,33 +24,45 @@ public class BeerController {
     private static final Logger log = LoggerFactory.getLogger(BeerController.class);
 
     @RequestMapping("/beer/random")
-    public Beer getRandomBeer() {
-        Beer beer = restTemplate.getForObject(
-                "http://api.brewerydb.com/v2/beer/random?key=555b3a6999068ef21a9075893a4524a6", Beer.class);
-        log.info(beer.toString());
-        return beer;
+    public Beer getRandomBeer() throws APICallException {
+        try {
+            Beer beer = restTemplate.getForObject(
+                    "http://api.brewerydb.com/v2/beer/random?key=555b3a6999068ef21a9075893a4524a6", Beer.class);
+
+            log.info(beer.toString());
+            return beer;
+
+        } catch (Exception apiCallExc) {
+            throw new APICallException();
+        }
+
     }
 
     @RequestMapping("/beer/randomWithBrewery")
-    public HomeworkBeer2 getRandomBeerBrewery() {
+    public HomeworkBeer2 getRandomBeerBrewery() throws APICallException {
 
-        Beer beer = restTemplate.getForObject(
-                "http://api.brewerydb.com/v2/beer/random?key=555b3a6999068ef21a9075893a4524a6", Beer.class);
-        String beerID = beer.getData().getId();
+        try {
+            Beer beer = restTemplate.getForObject(
+                    "http://api.brewerydb.com/v2/beer/random?key=555b3a6999068ef21a9075893a4524a6", Beer.class);
 
-
+            String beerID = beer.getData().getId();
 
 //        Beer beerWithBrewery = restTemplate.getForObject(
 //                "http://api.brewerydb.com/v2/beer/"+ beerID+"?withBreweries=Y&key=555b3a6999068ef21a9075893a4524a6",
 //                Beer.class);
 //        log.info(beerWithBrewery.toString());
 
-        HomeworkBeer homeworkBeer = restTemplate.getForObject(
-                "http://api.brewerydb.com/v2/beer/"+ beerID+"?withBreweries=Y&key=555b3a6999068ef21a9075893a4524a6",
-                HomeworkBeer.class);
+            HomeworkBeer homeworkBeer = restTemplate.getForObject(
+                    "http://api.brewerydb.com/v2/beer/"+ beerID+"?withBreweries=Y&key=555b3a6999068ef21a9075893a4524a6",
+                    HomeworkBeer.class);
 
-        HomeworkBeer2 hwBeer = new HomeworkBeer2(homeworkBeer);
+            HomeworkBeer2 hwBeer = new HomeworkBeer2(homeworkBeer);
 
-        return hwBeer;
+            return hwBeer;
+
+        } catch (Exception apiCallExc) {
+            throw new APICallException();
+        }
+
     }
 }

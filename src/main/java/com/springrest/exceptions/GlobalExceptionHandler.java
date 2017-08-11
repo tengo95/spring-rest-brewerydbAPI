@@ -10,22 +10,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-//    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Data integrity violation")
-//    @ExceptionHandler(ForecastNotFoundException.class)
-//    public void forecastNotFound (){
-//
-//    }
 
-    //@ResponseStatus(value = HttpStatus.CONFLICT, reason = "Data integrity violation")
-//    @ResponseBody
-//    @ExceptionHandler(.class)
-//    public RestExceptionResponse forecastNotFound (){
-//
-//        RestExceptionResponse restExceptionResponse = new RestExceptionResponse();
-//        restExceptionResponse.setError("error");
-//
-//        return restExceptionResponse;
-//
-//    }
+    @ResponseBody
+    @ExceptionHandler(APICallException.class)
+    public RestExceptionResponse unableToCallAPI (){
+
+        RestExceptionResponse restExceptionResponse = new RestExceptionResponse();
+        restExceptionResponse.setError("Unable to call API");
+
+        return restExceptionResponse;
+
+    }
 
 }

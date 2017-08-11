@@ -1,15 +1,15 @@
 package com.springrest.exceptions;
 
 /**
- * Created by tanerali on 09/08/2017.
+ * Created by tanerali on 11/08/2017.
  */
-public class DatabaseAccessException extends RuntimeException {
+public class APICallException extends Exception{
 
     String msg;
 
     @Override
     public String toString() {
-        return "DatabaseAccessException{" +
+        return "APICallException{" +
                 "msg='" + msg + '\'' +
                 '}';
     }
